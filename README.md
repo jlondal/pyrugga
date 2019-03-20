@@ -12,7 +12,7 @@ If you have never used Python before or have limited experience with it then we 
 
 ```bash
 pip install ...
-``
+```
 
 ## Never Python
 
