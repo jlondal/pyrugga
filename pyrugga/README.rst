@@ -1,0 +1,3 @@
+PyRugga
+
+A Rugby analysis library for Python ...
