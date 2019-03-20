@@ -1,4 +1,14 @@
+"""
+Author: James Londal
+Copyright: Copyright 2019, Picopie Ltd
+License: MIT
+Version: 1.0.0
+Maintainer: James Londal
+Status: Working Progress
+"""
+
 import sys
+
 if sys.version_info[0] < 3:
     from StringIO import StringIO
 else:
@@ -400,7 +410,8 @@ DESCRIPTIONS = StringIO("""qualifier,qualifier_description
 465,Lineout Alternative
 466,Quick throw from upfield postion
 467,Ineffective
-468,Concussion469,Retained Collection
+468,Concussion
+469,Retained Collection
 470,FTSU
 471,Passive - Upright
 472,Neutral

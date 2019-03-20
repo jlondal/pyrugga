@@ -1,9 +1,7 @@
 # Additional
 pandas
-tables
 psycopg2
 sqlalchemy
-h5py
 scipy
 scikit-learn
 statsmodels
