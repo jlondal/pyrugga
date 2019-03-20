@@ -6,8 +6,8 @@ services:
     ports:
      - "80:8000"
     volumes:
-     - "./notebooks:/home/notebooks"
-     - "./pyrugga:/home/notebooks/pyrugga"
+     - "./notebook:/home/notebook"
+     - "./pyrugga:/home/notebook/pyrugga"
     depends_on:
      - postgres
     command: bash start_jupyter.sh
