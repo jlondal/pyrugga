@@ -8,25 +8,41 @@ Status: Working Progress
 
 Description:
 
-Conversts XML file into two dataframes. One contains the events of the match and the other is a summary of the match
+Conversts SuperScout XML file into two dataframes. One containing the events of the match and the other is a summary of the match.
+The main function is to_df
 
 """
 
 import xml.etree.ElementTree as ET
 import pandas as pd
 import os
+from tempfile import NamedTemporaryFile
+import tempfile
+
 
 from pyrugga.lookup import events, descriptions
 
+"""
+Returns a dataframe with a summary of each players in the match
 
-def get_players_fixture(f_in,f_out):
+-- fixture_code
+-- team_id
+-- player_id
+-- team_name
+-- players_name
+-- min (minutes on pitch)
+-- shirt_no
+-- position
+
+"""
+def get_players_fixture(f_in):
     tree = ET.parse(f_in)
     root = tree.getroot()
 
     for child in root:
         fixture_code = child.text
 
-    fout = open(f_out,'w')
+    fout = NamedTemporaryFile(mode='wt',delete=False)
 
     c = 0
 
@@ -50,7 +66,9 @@ def get_players_fixture(f_in,f_out):
 
     fout.close()
 
-    players = pd.read_csv(f_out)
+    players = pd.read_csv(fout.name)
+    os.remove(fout.name)
+
 
     players['players_name'] = players['PLFORN'] + ' ' + players['PLSURN']
 
@@ -67,11 +85,26 @@ def get_players_fixture(f_in,f_out):
     players = players[['fixture_code','team_id','player_id','team_name','players_name','min','shirt_no','position']]
     return players
 
-def get_fixture_actions(f_in,f_out):
+"""
+Returns a dataframe with all the events from a match
+
+-- action_id
+-- action_result
+-- action_type
+-- fixture_code
+-- team_name
+-- match_time
+-- metres
+-- phases
+-- set_num
+-- player_id
+-- ps_id
+"""
+def get_fixture_actions(f_in):
     tree = ET.parse(f_in)
     root = tree.getroot()
 
-    fout = open(f_out,'w')
+    fout = NamedTemporaryFile(mode='wt',delete=False)
 
     c = 0
 
@@ -89,9 +122,12 @@ def get_fixture_actions(f_in,f_out):
 
         c += 1
         fout.write(out)
+
     fout.close()
 
-    actions = pd.read_csv(f_out)
+    actions = pd.read_csv(fout.name)
+    os.remove(fout.name)
+
 
     actions = actions.rename(columns={
         'ID' : 'action_id' ,
@@ -115,14 +151,27 @@ def get_fixture_actions(f_in,f_out):
 
     return actions
 
-def get_fixture(f_in,f_out):
+"""
+Returns a dataframe with summary of a match
+
+
+-- fixture_code
+-- ref_id
+-- ref_name
+-- fixture_date
+-- fx_week
+-- awayteam
+-- hometeam
+
+"""
+def get_fixture(f_in):
     tree = ET.parse(f_in)
     root = tree.getroot()
 
     for child in root:
         fixture_code = child.text
 
-    fout = open(f_out,'w')
+    fout = NamedTemporaryFile(mode='wt',delete=False)
 
     c = 0
 
@@ -146,7 +195,10 @@ def get_fixture(f_in,f_out):
         fout.write(out)
 
     fout.close()
-    match = pd.read_csv(f_out)
+
+
+    match = pd.read_csv(fout.name)
+    os.remove(fout.name)
 
     match = match.rename(columns={
         'REFID' : 'ref_id' ,
@@ -158,7 +210,9 @@ def get_fixture(f_in,f_out):
     match = match[['fixture_code','ref_id','ref_name','fixture_date','fx_week','awayteam','hometeam']]
     return match
 
-
+"""
+Returns the points scored from in an event
+"""
 def calc_score(row):
     score = 0
     if row['event'] == "Try":
@@ -177,17 +231,16 @@ def calc_score(row):
 
     return score
 
+
+"""
+Returns a dataframe with event by events details
+"""
 def to_df(super_scout_file_name):
 
-    import uuid
 
-    tmp_filename = str(uuid.uuid4())
-
-    actions = get_fixture_actions(super_scout_file_name,tmp_filename)
-    players = get_players_fixture(super_scout_file_name,tmp_filename)
-    match = get_fixture(super_scout_file_name,tmp_filename)
-
-    os.remove(tmp_filename)
+    actions = get_fixture_actions(super_scout_file_name)
+    players = get_players_fixture(super_scout_file_name)
+    match = get_fixture(super_scout_file_name)
 
     actions_players = pd.merge(actions, players,  left_on = 'player_id', right_on = 'player_id')
     actions_players = pd.merge(actions_players, events,  left_on = 'action', right_on = 'action')

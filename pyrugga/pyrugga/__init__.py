@@ -14,6 +14,8 @@ import sqlite3
 from sqlalchemy import create_engine
 import pandas as pd
 import numpy as np
+import os
+import uuid
 
 class Match:
 
@@ -35,8 +37,11 @@ class Match:
         return (self.summary['home_score'] == self.summary['away_score'])[0]
 
     def _genTimeLine(self):
-        conn = sqlite3.connect('tmp.db')
-        engine = create_engine('sqlite:///tmp.db')
+
+        tmp_filename = str(uuid.uuid4())
+        conn = sqlite3.connect(tmp_filename)
+
+        engine = create_engine('sqlite:///%s' % (tmp_filename))
 
         self.summary.to_sql('match_summary',engine,if_exists='replace',index=False)
         self.events.to_sql('match_events',engine,if_exists='replace',index=False)
@@ -458,6 +463,8 @@ class Match:
         1,2
 
         """
+
+        os.remove(tmp_filename)
 
         timeline = pd.io.sql.read_sql(sql,conn)
 
