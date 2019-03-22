@@ -6,3 +6,4 @@ scipy
 scikit-learn
 statsmodels
 jupyter
+pyrugga

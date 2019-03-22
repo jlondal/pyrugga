@@ -8,6 +8,9 @@ RUN pip install --no-cache-dir -r /home/requirements.txt
 
 COPY start_jupyter.sh /home
 
+COPY 719101_wspvnat_new.xml /home
+COPY 918053_walvfra_new.xml /home
+
 WORKDIR /home
 
 EXPOSE 8000

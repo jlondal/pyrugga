@@ -1,26 +1,50 @@
 # Pyrugga
 
-Pyrugga is a library to help analyse rugby matches. You will require access to Super Scout files from [Opta](https://www.youtube.com/watch?v=AVmqCoF5qeU) which can be download via [Prorugby](https://optaprorugby.com).
+Pyrugga is a library to help analyse rugby matches. It is a working progres so, I would love to here from you if you have any ideas on how to improve things or for new features you would like to see feel free to contact me. The purpose of Pyrugga is to get more performance analysts into programming with Python.  
 
-To help you get up to speed with Pyrugga we have included a Docker container with all the dependencies taken care of for you.  There is a Jupyter server which can be accessed via (http://127.0.0.1)
+If you have never used Python before skip down to the **Never Python** section for a step by step walk through, but if you have then here is the very quick version.
 
-# Quick Start
-
-If you have never used Python before or have limited experience with it then we recommend you following the **Never Python** track leveraging the Docker containers. If on the other hand you already have setup you environment just how you like it install Pyrugga from via pip as follows.
+To install
 
 ```bash
-pip install ...
+pip install pyrugga
 ```
 
-## Never Python
+To install the development version
 
-You will need to install Docker before you can run Pyrugga. Docker is tool to build mini virtual machines and can be download for [Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac) and [Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows) from Dockers website. It's free.
+```bash
+pip install git+https://github.com/jlondal/pyrugga.git
+```
+
+You will require Super Scout files from [Opta](https://www.youtube.com/watch?v=AVmqCoF5qeU) which can be download via [Prorugby](https://optaprorugby.com).
+
+
+```python
+import pyrugga as prg
+
+df = pgr.Match('918053_walvfra_new.xml')
+
+#print summary of match
+df.summary
+
+#list all actions in a matches
+df.events
+
+#time line of a match
+df.timeline
+
+
+```
+
+# Never Python
+
+To help you get up to speed as quickly as possible we have included a Docker container with everything you need. Docker is tool to run mini-virtual machines, or micro services, and can be download for [Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac) and [Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows) from Dockers website.
 
 Once Docker is installed you will either need to open up your Terminal (Mac/Linux) or Command Line (Windows).
 
-### Mac
+## Mac
 
-Open your Terminal. If you do not know how to do that or what the Terminal is watch the follow [video](https://www.youtube.com/watch?v=zw7Nd67_aFw). Then navigate to the director you have downloaded Pyrugga to. For example if you have downloaded Pyrugga to your Downloads folder then you would need to type something like.
+Open your Terminal. If you do not know how to do that [watch](https://www.youtube.com/watch?v=zw7Nd67_aFw). Then navigate to the folder you have downloaded Pyrugga to. For example if you have downloaded Pyrugga to your Downloads folder then you would need to type something like.
 
 ```bash
 cd /Users/henry_honeyball/Downloads/pyrugga
@@ -31,19 +55,20 @@ Obviously if your user name is not henry_honeyball change it to whatever your us
 To launch the Docker containers type
 
 ```bash
-docker-compose up
+docker-compose down && docker-compose up
 ```
 
 then navigate to the Jupyter [server](http://127.0.0.1) were you will find a collection of notebooks to guide you through getting started with Pyrugga
 
-### Windows
+## Windows
 
 Open the Command line. If you do not know how to do that watch the following [video](https://www.youtube.com/watch?v=MBBWVgE0ewk).
 
 Then navigate (via the Command Line) to the folder you have downloaded Pyrugga to and type
 
 ```bash
+docker-compose down
 docker-compose up
 ```
 
-then navigate to the Jupyter [server](http://127.0.0.1) were you will find a collection of notebooks to guide you through getting started with Pyrugga
+then navigate to the Jupyter [server](http://127.0.0.1) where you will find a collection of notebooks to guide you through getting started with Pyrugga
