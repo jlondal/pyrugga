@@ -1,8 +1,8 @@
 # Pyrugga
 
-Pyrugga is a library to help analyse rugby matches. It is a working progres so, I would love to hear from you if you have any ideas on how to improve things or for new features you would like to see. Feel free to contact me. The purpose of Pyrugga is to get more performance analysts into programming.  
+Pyrugga is a library to help analyse rugby matches. It is a working progres so, I would love to hear from you if you have any ideas on how to improve things or for new features you would like to see let me know.
 
-If you have never used Python before skip down to the **Never Python** section for a step by step walk through, but if you have then here is the very quick version.
+If you have never used Python don't worry there is a step by step walk through in the **Never Python** section, but if you have then here is the very quick version.
 
 To install
 
