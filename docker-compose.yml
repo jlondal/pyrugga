@@ -6,14 +6,5 @@ services:
     ports:
      - "80:8000"
     volumes:
-     - "./pyrugga:/home/pyrugga"
-    depends_on:
-     - postgres
+     - ".:/home/pyrugga"
     command: bash start_jupyter.sh
-
-  postgres:
-    build : postgres
-    image : postgres
-    environment:
-      POSTGRES_PASSWORD: HenryHoneyBall
-      POSTGRES_USER: postgres

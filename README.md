@@ -1,10 +1,8 @@
 # Pyrugga
 
-Pyrugga is a module to help analyse rugby matches using Super Scout files from [Opta](https://www.youtube.com/watch?v=AVmqCoF5qeU). You will require Super Scout XML files from Opta which can be download from [Prorugby](https://optaprorugby.com).
+Pyrugga is a library to help analyse rugby matches. You will require access to Super Scout files from [Opta](https://www.youtube.com/watch?v=AVmqCoF5qeU) which can be download via [Prorugby](https://optaprorugby.com).
 
-To help you get up to speed with Pyrugga faster we have included a collection of Docker containers with all the dependencies taken care of for you.  There is a Jupyter server which can be accessed via (http://127.0.0.1) as well as a Postgres database. The password for the Jupyter server is **HenryHoneyBall**.
-
-**PLEASE NOTE** Pyrugga is designed to run on a laptop or desktop and not on a public facing website
+To help you get up to speed with Pyrugga we have included a Docker container with all the dependencies taken care of for you.  There is a Jupyter server which can be accessed via (http://127.0.0.1)
 
 # Quick Start
 
