@@ -4,7 +4,7 @@
 
 Pyrugga is a library to help analyse rugby matches using Opta's Super Scout files. Example notebooks can found are:
 
-* [Getting Started](jupyter/tuts/Getting Started.ipynb)
+* [Getting Started](https://github.com/jlondal/pyrugga/blob/master/jupyter/tuts/Getting%20Started.ipynb)
 * Predicting Results
 * Benchmarking
 
