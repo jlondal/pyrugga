@@ -5,6 +5,3 @@ License: GNU AFFERO GENERAL PUBLIC LICENSE
 Version: 1.0.0
 Maintainer: James Londal
 """
-
-#converts SuperScout file to DataFrame
-from pyrugga.match import Match

@@ -14,7 +14,7 @@ Open your Terminal. If you do not know how to do that [watch](https://www.youtub
 cd /Users/henry_honeyball/Downloads/pyrugga
 ```
 
-Obviously if your user name is not henry_honeyball change it to whatever your user name is. A tutorial on how to use the Terminal can be found [here](https://www.youtube.com/watch?v=oxuRxtrO2Ag).
+Obviously if your user name is not henry_honeyball change it to whatever your user name is. A tutorial on how to use theerminal can be found [here](https://www.youtube.com/watch?v=oxuRxtrO2Ag).
 
 To launch the Docker containers type
 
@@ -36,8 +36,3 @@ docker-compose up
 ```
 
 then navigate to the [Jupyter server](http://127.0.0.1) where you will find a collection of notebooks to guide you through getting started with Pyrugga
-
-
-# License
-
-See [LICENSE](LICENSE)
