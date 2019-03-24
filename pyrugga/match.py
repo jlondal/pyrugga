@@ -26,8 +26,6 @@ class Match:
     The default method for defining an region on the pitch.
     This function can be replaced using when calling the __init__
     """
-    def _Zones( x ):
-        return round( x / 10)
 
     """
     Creates a Match object from a Superscout XML file
@@ -36,8 +34,10 @@ class Match:
         (self.events,self.summary) = to_df(fn_name)
         self._genTimeLine()
 
+        def _Zones( x ): return round( x / 10)
+
         if  zones == None:
-            pass
+            self._Zones = _Zones
         else :
             self._Zones = zones
 
