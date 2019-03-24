@@ -26,8 +26,8 @@ class Match:
     The default method for defining an region on the pitch.
     This function can be replaced using when calling the __init__
     """
-    def _Zones(x):
-        return round(x / 10)
+    def _Zones( x ):
+        return round( x / 10)
 
     """
     Creates a Match object from a Superscout XML file
@@ -37,11 +37,9 @@ class Match:
         self._genTimeLine()
 
         if  zones == None:
-            self._Zones =  self._Zones
+            pass
         else :
             self._Zones = zones
-
-
 
 
     def getRef(self):
@@ -518,7 +516,7 @@ class Match:
 
         return df2.query('y_coord > 0 and y_coord < 11')
 
-    def getTerritory(self,perc=False):
+    def getTerritory(self, perc=False):
         pos = self.events.groupby(['team_name','x_coord','y_coord']).count()['action_id'].reset_index()
 
         pos['y_coord'] = pos['y_coord'].apply(self._Zones)
