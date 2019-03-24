@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name='pyrugga',
-      version='1.0.0',
+      version='1.0.1',
       description='A library to analyse Rugby matches using Opta\'s SuperScout files',
       url='https://github.com/jlondal/pyrugga',
       author='James Londal',
