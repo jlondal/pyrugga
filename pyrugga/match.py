@@ -27,7 +27,7 @@ class Match:
     This function can be replaced using when calling the __init__
     """
     def _Zones(x):
-        return round(x / 10)= None
+        return round(x / 10)
 
     """
     Creates a Match object from a Superscout XML file
@@ -40,6 +40,9 @@ class Match:
             self._Zones =  self._Zones
         else :
             self._Zones = zones
+
+
+
 
     def getRef(self):
         return self.summary['ref_name'].values[0]

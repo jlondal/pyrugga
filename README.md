@@ -22,7 +22,7 @@ pip install pyrugga
 To install the development version
 
 ```bash
-pip install git+https://github.com/jlondal/pyrugga.git
+pip install -U git+https://github.com/jlondal/pyrugga.git
 ```
 
 You will require Super Scout files from [Opta](https://www.youtube.com/watch?v=AVmqCoF5qeU) which can be download via [Prorugby](https://optaprorugby.com).
