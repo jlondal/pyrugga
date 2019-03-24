@@ -20,7 +20,7 @@ class Match:
 
     events = None
     summary = None
-    timeline
+    timeline = None
 
     """
     The default method for defining an region on the pitch.
