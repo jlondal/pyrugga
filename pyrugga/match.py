@@ -22,6 +22,9 @@ class Match:
     summary = None
     timeline = None
 
+    hometeam = None
+    awayteam = None
+
     """
     The default method for defining an region on the pitch.
     This function can be replaced using when calling the __init__
@@ -40,6 +43,9 @@ class Match:
             self._Zones = _Zones
         else :
             self._Zones = zones
+
+        self.hometeam = self.summary['hometeam'].values[0]
+        self.awayteam = self.summary['awayteam'].values[0]
 
 
     def getRef(self):
@@ -528,3 +534,33 @@ class Match:
             return df2.query('y_coord > 0 and y_coord < 11 and x_coord > 0 and x_coord < 11' )/df2.query('y_coord > 0 and y_coord < 11 and x_coord > 0 and x_coord < 11' ).sum()
 
         return df2.query('y_coord > 0 and y_coord < 11 and x_coord > 0 and x_coord < 11')
+
+    """
+    Draws a heatmap of a match
+    """
+    def heat_map(self):
+
+        fig = plt.figure(figsize=(20,6))
+
+
+        fig.suptitle('%s vs. %s ' % (self.hometeam, self.awayteam),fontsize="x-large")
+
+        ax  = plt.subplot(1, 2, 2)
+        plt.title(self.hometeam)
+
+        hmap = match.getTerritory(perc=False).reset_index()\
+        .pivot("y_coord","x_coord",self.hometeam).fillna(0).astype(int)
+
+        sns.heatmap(hmap, annot=True, fmt="d", linewidths=.5,ax=ax,cmap="Greens")
+
+        ax  = plt.subplot(1, 2, 1)
+        plt.title(self.awayteam)
+
+        hmap = match.getTerritory(perc=False).reset_index()\
+        .pivot("y_coord","x_coord",self.awayteam).fillna(0).astype(int)
+
+        # Draw a heatmap with the numeric values in each cell
+        sns.heatmap(hmap, annot=True, fmt="d", linewidths=.5,ax=ax,cmap="Greens")
+
+
+        plt.show()

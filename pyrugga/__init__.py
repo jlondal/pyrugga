@@ -6,7 +6,7 @@ Version: 1.0.0
 Maintainer: James Londal
 """
 
-__version__ = "1.0.1"
-
 #converts SuperScout file to DataFrame
 from pyrugga.match import Match
+
+__version__ = "1.0.1"
