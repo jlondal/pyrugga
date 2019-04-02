@@ -544,7 +544,7 @@ class Match:
         if cust_metric == None:
             pos = self.events.groupby(['team_name','x_coord','y_coord']).count()['action_id'].reset_index()
         else:
-            pos = self.events.query('event == "%s"' % (cust_metric)).groupby(['team_name','x_coord','y_coord']).sum()[cust_metric].reset_index()
+            pos = self.events.query('event == "%s"' % (cust_metric)).groupby(['team_name','x_coord','y_coord']).count()['action_id'].reset_index()
 
 
         pos['y_coord'] = pos['y_coord'].apply(self._Zones)
