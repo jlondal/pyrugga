@@ -579,7 +579,7 @@ class Match:
     """
     Returns the territory metric
     """
-    def getTerritoryMetric(self, , event=None, event_type=None, description=None):
+    def getTerritoryMetric(self, event=None, event_type=None, description=None):
         return pd.DataFrame((self.getTerritoryX(perc=False, event=event, event_type=event_type, description=description) / self.getTerritoryX(perc=False,event=event, event_type=event_type, description=description).sum().sum()).sum()).reset_index().rename(columns={ 0 : 'territory'})
 
     """
