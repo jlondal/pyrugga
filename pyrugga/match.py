@@ -569,12 +569,11 @@ class Match:
         ax  = plt.subplot(1, 2, 1)
         plt.title(self.awayteam)
 
-        hmap = match.getTerritory(perc=False).reset_index()\
+        hmap = self.getTerritory(perc=False).reset_index()\
         .pivot("y_coord","x_coord",self.awayteam).fillna(0).astype(int)
 
         # Draw a heatmap with the numeric values in each cell
         sns.heatmap(hmap, annot=True, fmt="d", linewidths=.5,ax=ax,cmap="Greens")
-
 
         plt.show()
 
