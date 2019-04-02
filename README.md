@@ -19,7 +19,7 @@ pip install pyrugga
 To install the development version
 
 ```bash
-!pip install --upgrade --force-reinstal git+https://github.com/jlondal/pyrugga.git
+!pip install --upgrade --force-reinstal --no-deps git+https://github.com/jlondal/pyrugga.git
 ```
 
 You will require Super Scout files from [Opta](https://www.youtube.com/watch?v=AVmqCoF5qeU) which can be download via [Prorugby](https://optaprorugby.com).

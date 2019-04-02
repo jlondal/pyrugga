@@ -27,8 +27,6 @@ class Match:
     hometeam = None
     awayteam = None
 
-    player_summary = None
-
     """
     The default method for defining an region on the pitch.
     This function can be replaced using when calling the __init__
@@ -582,7 +580,7 @@ class Match:
     minutes played, actions involved in or phases
     norm = ['min','actions','phases']
     """
-    def _player_summary(self,norm=None):
+    def player_summary(self,norm=None):
 
         tmp_filename = str(uuid.uuid4())
         conn = sqlite3.connect(tmp_filename)
