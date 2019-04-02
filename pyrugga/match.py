@@ -16,7 +16,7 @@ import numpy as np
 import os
 import uuid
 import matplotlib.pyplot as plt
-
+import seaborn as sns
 
 class Match:
 
@@ -561,7 +561,7 @@ class Match:
         ax  = plt.subplot(1, 2, 2)
         plt.title(self.hometeam)
 
-        hmap = match.getTerritory(perc=False).reset_index()\
+        hmap = self.getTerritory(perc=False).reset_index()\
         .pivot("y_coord","x_coord",self.hometeam).fillna(0).astype(int)
 
         sns.heatmap(hmap, annot=True, fmt="d", linewidths=.5,ax=ax,cmap="Greens")
