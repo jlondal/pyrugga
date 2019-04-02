@@ -550,8 +550,7 @@ class Match:
     Returns the territory metric
     """
     def getTerritoryMetric(self):
-        return (self.getTerritoryX(perc=False) / self.getTerritoryX(perc=False).sum().sum()).sum()
-
+        return pd.DataFrame((self.getTerritoryX(perc=False) / self.getTerritoryX(perc=False).sum().sum()).sum()).reset_index().rename(columns={ 0 : 'territory'})
     """
     Draws a heatmap of a match
     """
