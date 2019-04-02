@@ -726,18 +726,20 @@ class Match:
         """
 
 
-        self.player_summary = pd.io.sql.read_sql(sql,conn)
+        player_summary = pd.io.sql.read_sql(sql,conn)
 
         os.remove(tmp_filename)
 
-        self.player_summary['dist_traveled'] = np.sqrt(self.player_summary['dist_traveled'])
+        player_summary['dist_traveled'] = np.sqrt(player_summary['dist_traveled'])
 
-        self.player_summary = self.player_summary.set_index(['team_name', 'position', 'players_name'])
+        player_summary = player_summary.set_index(['team_name', 'position', 'players_name'])
 
 
         if norm == 'min':
-            self.player_summary.iloc[:,3:] = self.player_summary.iloc[:,3:].div(self.player_summary['mins'], axis=0)
+            player_summary.iloc[:,3:] = player_summary.iloc[:,3:].div(player_summary['mins'], axis=0)
         elif norm == 'actions':
-            self.player_summary.iloc[:,3:] = self.player_summary.iloc[:,3:].div(self.player_summary['actions'], axis=0)
+            player_summary.iloc[:,3:] = player_summary.iloc[:,3:].div(player_summary['actions'], axis=0)
         elif norm == 'phases':
-            self.player_summary.iloc[:,3:] = self.player_summary.iloc[:,3:].div(self.player_summary['phases'], axis=0)
+            player_summary.iloc[:,3:] = player_summary.iloc[:,3:].div(player_summary['phases'], axis=0)
+
+        return player_summary
