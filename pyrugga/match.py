@@ -506,6 +506,8 @@ class Match:
     Gets the activities by zone length
     """
     def getTerritoryX(self,perc=False, event=None, event_type=None, description=None):
+        tmp = self.events
+
         if event is not None :
             tmp = self.events.query('event == "%s"' % (event))
 
@@ -515,7 +517,7 @@ class Match:
         if description is not None :
             tmp = self.events.query('description == "%s"' % (event))
 
-        pos = self.events.groupby(['team_name','x_coord']).count()['action_id'].reset_index()
+        pos = tmp.groupby(['team_name','x_coord']).count()['action_id'].reset_index()
 
         pos['x_coord'] = pos['x_coord'].apply(self._Zones)
         df2 = pd.pivot_table(pos, values='action_id', index=['x_coord'],columns=['team_name'], aggfunc=np.sum, fill_value=0)
@@ -529,6 +531,7 @@ class Match:
     Gets the activities by zone breadth
     """
     def getTerritoryY(self,perc=False, event=None, event_type=None, description=None):
+        tmp = self.events
 
         if event is not None :
             tmp = self.events.query('event == "%s"' % (event))
@@ -539,7 +542,7 @@ class Match:
         if description is not None :
             tmp = self.events.query('description == "%s"' % (event))
 
-        pos = self.events.groupby(['team_name','y_coord']).count()['action_id'].reset_index()
+        pos = tmp.groupby(['team_name','y_coord']).count()['action_id'].reset_index()
 
         pos['y_coord'] = pos['y_coord'].apply(self._Zones)
         df2 = pd.pivot_table(pos, values='action_id', index=['y_coord'],columns=['team_name'], aggfunc=np.sum, fill_value=0)
@@ -553,6 +556,7 @@ class Match:
     Gets the activities by zone breadth
     """
     def getTerritory(self,perc=False, event=None, event_type=None, description=None):
+        tmp = self.events
 
         if event is not None :
             tmp = self.events.query('event == "%s"' % (event))
