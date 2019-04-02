@@ -509,7 +509,7 @@ class Match:
         if cust_metric == None:
             pos = self.events.groupby(['team_name','x_coord']).count()['action_id'].reset_index()
         else:
-            pos = self.events.groupby(['team_name','x_coord']).sum()[cust_metric].reset_index()
+            pos = self.events.query('event == "%s"' % (cust_metric)).groupby(['team_name','x_coord']).count()['action_id'].reset_index()
 
         pos['x_coord'] = pos['x_coord'].apply(self._Zones)
         df2 = pd.pivot_table(pos, values='action_id', index=['x_coord'],columns=['team_name'], aggfunc=np.sum, fill_value=0)
@@ -526,7 +526,7 @@ class Match:
         if cust_metric == None:
             pos = self.events.groupby(['team_name','y_coord']).count()['action_id'].reset_index()
         else:
-            pos = self.events.groupby(['team_name','y_coord']).sum()[cust_metric].reset_index()
+            pos = self.events.query('event == "%s"' % (cust_metric)).groupby(['team_name','y_coord']).count()['action_id'].reset_index()
 
         pos['y_coord'] = pos['y_coord'].apply(self._Zones)
         df2 = pd.pivot_table(pos, values='action_id', index=['y_coord'],columns=['team_name'], aggfunc=np.sum, fill_value=0)
@@ -544,7 +544,7 @@ class Match:
         if cust_metric == None:
             pos = self.events.groupby(['team_name','x_coord','y_coord']).count()['action_id'].reset_index()
         else:
-            pos = self.events.groupby(['team_name','x_coord','y_coord']).sum()[cust_metric].reset_index()
+            pos = self.events.query('event == "%s"' % (cust_metric)).groupby(['team_name','x_coord','y_coord']).sum()[cust_metric].reset_index()
 
 
         pos['y_coord'] = pos['y_coord'].apply(self._Zones)
