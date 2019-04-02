@@ -512,10 +512,10 @@ class Match:
             tmp = self.events.query('event == "%s"' % (event))
 
         if event_type is not None :
-            tmp = self.events.query('event_type == "%s"' % (event))
+            tmp = self.events.query('event_type == "%s"' % (event_type))
 
         if description is not None :
-            tmp = self.events.query('description == "%s"' % (event))
+            tmp = self.events.query('description == "%s"' % (description))
 
         pos = tmp.groupby(['team_name','x_coord']).count()['action_id'].reset_index()
 
@@ -537,10 +537,10 @@ class Match:
             tmp = self.events.query('event == "%s"' % (event))
 
         if event_type is not None :
-            tmp = self.events.query('event_type == "%s"' % (event))
+            tmp = self.events.query('event_type == "%s"' % (event_type))
 
         if description is not None :
-            tmp = self.events.query('description == "%s"' % (event))
+            tmp = self.events.query('description == "%s"' % (description))
 
         pos = tmp.groupby(['team_name','y_coord']).count()['action_id'].reset_index()
 
@@ -562,10 +562,10 @@ class Match:
             tmp = self.events.query('event == "%s"' % (event))
 
         if event_type is not None :
-            tmp = self.events.query('event_type == "%s"' % (event))
+            tmp = self.events.query('event_type == "%s"' % (event_type))
 
         if description is not None :
-            tmp = self.events.query('description == "%s"' % (event))
+            tmp = self.events.query('description == "%s"' % (description))
 
         pos = tmp.groupby(['team_name','x_coord','y_coord']).count()['action_id'].reset_index()
 
