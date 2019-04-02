@@ -5,12 +5,9 @@
 Pyrugga is a library to help analyse rugby matches using Opta's Super Scout files. Example notebooks can found are:
 
 * [Getting Started](https://github.com/jlondal/pyrugga/blob/master/jupyter/tuts/Getting%20Started.ipynb)
-* Predicting Results
-* Benchmarking
 
 
 If you have never used Python don't worry there is a step by step walk through on [Learning Python](Learning Python.md) section.
-
 
 
 To install
@@ -22,7 +19,7 @@ pip install pyrugga
 To install the development version
 
 ```bash
-pip install -U git+https://github.com/jlondal/pyrugga.git
+!pip install --upgrade --force-reinstal git+https://github.com/jlondal/pyrugga.git
 ```
 
 You will require Super Scout files from [Opta](https://www.youtube.com/watch?v=AVmqCoF5qeU) which can be download via [Prorugby](https://optaprorugby.com).
