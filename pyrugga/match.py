@@ -547,6 +547,12 @@ class Match:
         return df2.query('y_coord > 0 and y_coord < 11 and x_coord > 0 and x_coord < 11')
 
     """
+    Returns the territory metric
+    """
+    def getTerritoryMetric(self):
+        return (self.getTerritoryX(perc=False) / self.getTerritoryX(perc=False).sum().sum()).sum()
+
+    """
     Draws a heatmap of a match
     """
     def heat_map(self):
