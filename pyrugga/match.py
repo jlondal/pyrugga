@@ -505,7 +505,7 @@ class Match:
     """
     Gets the activities by zone length
     """
-    def getTerritoryX(self,perc=False, cust_metric=None):, event=None, event_type=None, description=None):
+    def getTerritoryX(self,perc=False, event=None, event_type=None, description=None):
         if event is not None :
             tmp = self.events.query('event == "%s"' % (event))
 
