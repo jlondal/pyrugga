@@ -505,8 +505,11 @@ class Match:
     """
     Gets the activities by zone length
     """
-    def getTerritoryX(self,perc=False):
-        pos = self.events.groupby(['team_name','x_coord']).count()['action_id'].reset_index()
+    def getTerritoryX(self,perc=False, cust_metric=None):
+        if cust_metric == None:
+            pos = self.events.groupby(['team_name','x_coord']).count()['action_id'].reset_index()
+        else:
+            pos = self.events.groupby(['team_name','x_coord']).sum()[cust_metric].reset_index()
 
         pos['x_coord'] = pos['x_coord'].apply(self._Zones)
         df2 = pd.pivot_table(pos, values='action_id', index=['x_coord'],columns=['team_name'], aggfunc=np.sum, fill_value=0)
@@ -519,8 +522,11 @@ class Match:
     """
     Gets the activities by zone breadth
     """
-    def getTerritoryY(self,perc=False):
-        pos = self.events.groupby(['team_name','y_coord']).count()['action_id'].reset_index()
+    def getTerritoryY(self,perc=False, cust_metric=None):
+        if cust_metric == None:
+            pos = self.events.groupby(['team_name','y_coord']).count()['action_id'].reset_index()
+        else:
+            pos = self.events.groupby(['team_name','y_coord']).sum()[cust_metric].reset_index()
 
         pos['y_coord'] = pos['y_coord'].apply(self._Zones)
         df2 = pd.pivot_table(pos, values='action_id', index=['y_coord'],columns=['team_name'], aggfunc=np.sum, fill_value=0)
@@ -533,8 +539,13 @@ class Match:
     """
     Gets the activities by zone breadth
     """
-    def getTerritory(self, perc=False):
-        pos = self.events.groupby(['team_name','x_coord','y_coord']).count()['action_id'].reset_index()
+    def getTerritory(self,perc=False, cust_metric=None):
+
+        if cust_metric == None:
+            pos = self.events.groupby(['team_name','x_coord','y_coord']).count()['action_id'].reset_index()
+        else:
+            pos = self.events.groupby(['team_name','x_coord','y_coord']).sum()[cust_metric].reset_index()
+
 
         pos['y_coord'] = pos['y_coord'].apply(self._Zones)
         pos['x_coord'] = pos['x_coord'].apply(self._Zones)
@@ -549,12 +560,13 @@ class Match:
     """
     Returns the territory metric
     """
-    def getTerritoryMetric(self):
-        return pd.DataFrame((self.getTerritoryX(perc=False) / self.getTerritoryX(perc=False).sum().sum()).sum()).reset_index().rename(columns={ 0 : 'territory'})
+    def getTerritoryMetric(self, cust_metric=None):
+        return pd.DataFrame((self.getTerritoryX(perc=False,cust_metric=cust_metric) / self.getTerritoryX(perc=False,cust_metric=cust_metric).sum().sum()).sum()).reset_index().rename(columns={ 0 : 'territory'})
+
     """
     Draws a heatmap of a match
     """
-    def heat_map(self):
+    def heat_map(self, cust_metric=None):
 
         fig = plt.figure(figsize=(20,6))
 
@@ -564,7 +576,7 @@ class Match:
         ax  = plt.subplot(1, 2, 2)
         plt.title(self.hometeam)
 
-        hmap = self.getTerritory(perc=False).reset_index()\
+        hmap = self.getTerritory(perc=False,cust_metric=cust_metric).reset_index()\
         .pivot("y_coord","x_coord",self.hometeam).fillna(0).astype(int)
 
         sns.heatmap(hmap, annot=True, fmt="d", linewidths=.5,ax=ax,cmap="Greens")
@@ -572,7 +584,7 @@ class Match:
         ax  = plt.subplot(1, 2, 1)
         plt.title(self.awayteam)
 
-        hmap = self.getTerritory(perc=False).reset_index()\
+        hmap = self.getTerritory(perc=False,cust_metric=cust_metric).reset_index()\
         .pivot("y_coord","x_coord",self.awayteam).fillna(0).astype(int)
 
         # Draw a heatmap with the numeric values in each cell
