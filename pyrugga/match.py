@@ -68,7 +68,7 @@ class Match:
         self.summary.to_sql('match_summary',engine,if_exists='replace',index=False)
         self.events.to_sql('match_events',engine,if_exists='replace',index=False)
 
-        d = os.path.dirname(sys.modules[package].__file__)
+        d = os.path.dirname(sys.modules['pyrugga'].__file__)
         sql = open(os.path.join(d, 'timeline.sql'), 'r').read()
 
         os.remove(tmp_filename)
@@ -215,9 +215,8 @@ class Match:
         self.events.to_sql('match_events',engine,if_exists='replace',index=False)
         self.players.to_sql('players',engine,if_exists='replace',index=False)
 
-        d = os.path.dirname(sys.modules[package].__file__)
+        d = os.path.dirname(sys.modules['pyrugga'].__file__)
         sql = open(os.path.join(d, 'player_summary.sql'), 'r').read()
-
 
         player_summary = pd.io.sql.read_sql(sql,conn)
 
