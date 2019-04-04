@@ -23,6 +23,7 @@ class Match:
     events = None
     summary = None
     timeline = None
+    players = None
 
     hometeam = None
     awayteam = None
@@ -36,7 +37,7 @@ class Match:
     Creates a Match object from a Superscout XML file
     """
     def __init__(self, fn_name, zones=None):
-        (self.events,self.summary) = to_df(fn_name)
+        (self.events,self.summary,self.players) = to_df(fn_name)
         self._genTimeLine()
 
         def _Zones( x ): return round( x / 10)

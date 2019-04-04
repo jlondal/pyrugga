@@ -21,20 +21,24 @@ import tempfile
 
 from pyrugga.lookup import events, descriptions
 
-"""
-Returns a dataframe with a summary of each players in the match
-
--- fixture_code
--- team_id
--- player_id
--- team_name
--- players_name
--- min (minutes on pitch)
--- shirt_no
--- position
-
-"""
 def get_players_fixture(f_in):
+    """
+    Extracts a summary of each players actions in the match
+
+    input:
+    file location
+
+    output:
+    -- fixture_code
+    -- team_id
+    -- player_id
+    -- team_name
+    -- players_name
+    -- min (minutes on pitch)
+    -- shirt_no
+    -- position
+
+    """
     tree = ET.parse(f_in)
     root = tree.getroot()
 
@@ -84,22 +88,28 @@ def get_players_fixture(f_in):
     players = players[['fixture_code','team_id','player_id','team_name','players_name','min','shirt_no','position']]
     return players
 
-"""
-Returns a dataframe with all the events from a match
 
--- action_id
--- action_result
--- action_type
--- fixture_code
--- team_name
--- match_time
--- metres
--- phases
--- set_num
--- player_id
--- ps_id
-"""
 def get_fixture_actions(f_in):
+    """
+    Returns a dataframe with all the events from a match
+
+    input:
+    file location
+
+    output
+
+    -- action_id
+    -- action_result
+    -- action_type
+    -- fixture_code
+    -- team_name
+    -- match_time
+    -- metres
+    -- phases
+    -- set_num
+    -- player_id
+    -- ps_id
+    """
     tree = ET.parse(f_in)
     root = tree.getroot()
 
@@ -150,20 +160,26 @@ def get_fixture_actions(f_in):
 
     return actions
 
-"""
-Returns a dataframe with summary of a match
 
-
--- fixture_code
--- ref_id
--- ref_name
--- fixture_date
--- fx_week
--- awayteam
--- hometeam
-
-"""
 def get_fixture(f_in):
+    """
+    Returns a dataframe with summary of a match
+
+    input:
+    file location
+
+    output:
+
+    -- fixture_code
+    -- ref_id
+    -- ref_name
+    -- fixture_date
+    -- fx_week
+    -- awayteam
+    -- hometeam
+
+    """
+
     tree = ET.parse(f_in)
     root = tree.getroot()
 
@@ -209,10 +225,20 @@ def get_fixture(f_in):
     match = match[['fixture_code','ref_id','ref_name','fixture_date','fx_week','awayteam','hometeam']]
     return match
 
-"""
-Returns the points scored from in an event
-"""
+
 def calc_score(row):
+    """
+    Calculated the points scored in an event
+
+    input:
+
+    a row from a DataFrame
+
+    output:
+
+    points scored
+
+    """
     score = 0
     if row['event'] == "Try":
         score = 5
@@ -231,11 +257,63 @@ def calc_score(row):
     return score
 
 
-"""
-Returns a dataframe with event by events details
-"""
-def to_df(super_scout_file_name):
 
+def to_df(super_scout_file_name):
+    """
+    converts a superscout file into three dataframes returned as a list
+
+    input:
+
+    location of a file
+
+    output:
+
+    - match_events
+         action_id
+         additional
+         advantage
+         description
+         event
+         event_type
+         fixture_code
+         home_team_advantage
+         match_time
+         metres
+         outcome
+         period
+         phases
+         players_name
+         position
+         ps_endstamp
+         ps_timestamp
+         set_num
+         shirt_no
+         team_name
+         x_coord
+         x_coord_end
+         y_coord
+         y_coord_end
+         points
+    - match
+        fixture_code
+        ref_id
+        ref_name
+        fixture_date
+        fx_week
+        awayteam
+        hometeam
+        home_score
+        away_score
+    - players
+        fixture_code
+        team_id
+        player_id
+        team_name
+        players_name
+        min (minutes on pitch)
+        shirt_no
+        position
+    """
 
     actions = get_fixture_actions(super_scout_file_name)
     players = get_players_fixture(super_scout_file_name)
@@ -384,4 +462,4 @@ def to_df(super_scout_file_name):
     del match['team_name_y']
     del match['team_name_x']
 
-    return (match_events,match)
+    return (match_events,match,players)
