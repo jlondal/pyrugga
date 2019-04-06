@@ -59,6 +59,9 @@ class Match:
         self.draw = (self.summary['home_score'] == self.summary['away_score'])[0]
 
     def _genTimeLine(self):
+        """
+        generates a timeline of match
+        """
 
         tmp_filename = str(uuid.uuid4())
         conn = sqlite3.connect(tmp_filename)
@@ -91,6 +94,7 @@ class Match:
         """
         Gets the activities by zone length
         """
+
         tmp = self.events
 
         if event is not None :
@@ -112,10 +116,11 @@ class Match:
 
         return df2.query('x_coord > 0 and x_coord < 11')
 
-    """
-    Gets the activities by zone breadth
-    """
+
     def getTerritoryY(self,perc=False, event=None, event_type=None, description=None):
+        """
+        Gets the activities by zone breadth
+        """
         tmp = self.events
 
         if event is not None :
@@ -137,10 +142,11 @@ class Match:
 
         return df2.query('y_coord > 0 and y_coord < 11')
 
-    """
-    Gets the activities by zone breadth
-    """
+
     def getTerritory(self,perc=False, event=None, event_type=None, description=None):
+        """
+        Gets the activities by zone breadth
+        """
         tmp = self.events
 
         if event is not None :
@@ -165,17 +171,29 @@ class Match:
 
         return df2.query('y_coord > 0 and y_coord < 11 and x_coord > 0 and x_coord < 11')
 
-    """
-    Returns the territory metric
-    """
+
     def getTerritoryMetric(self, event=None, event_type=None, description=None):
+        """
+        Returns the territory metric
+        """
         return pd.DataFrame((self.getTerritoryX(perc=False, event=event, event_type=event_type, description=description) / self.getTerritoryX(perc=False,event=event, event_type=event_type, description=description).sum().sum()).sum()).reset_index().rename(columns={ 0 : 'territory'})
 
-    """
-    Draws a heatmap of a match
-    """
-    def heat_map(self, event=None, event_type=None, description=None):
 
+    def heat_map(self, event=None, event_type=None, description=None):
+        """
+        Draws a heatmap of where the type of events took place
+
+        inputs
+
+            event=
+            event_type=
+            description=
+
+        outputs
+
+         two heat maps one for each team
+
+        """
         fig = plt.figure(figsize=(20,6))
 
 
@@ -207,6 +225,7 @@ class Match:
         minutes played, actions involved in or phases
         norm = ['min','actions','phases']
         """
+
         tmp_filename = str(uuid.uuid4())
         conn = sqlite3.connect(tmp_filename)
 
