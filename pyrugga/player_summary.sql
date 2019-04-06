@@ -1,7 +1,7 @@
 select
 t1.team_name, t1.position, t1.players_name,
-case when shirt_no > 15 then 1 else 0 end as replacement,
-case when shirt_no < 15 and t2.min < 80 then 1 else 0 end as replaced,
+case when t1.shirt_no > 15 then 1 else 0 end as replacement,
+case when t1.shirt_no < 15 and t2.min < 80 then 1 else 0 end as replaced,
 t2.min as mins,
 
 count(distinct action_id) as actions,
