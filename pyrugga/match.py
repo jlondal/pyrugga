@@ -84,7 +84,7 @@ class Match:
 
         timeline[timeline.columns[-2:-1][0] + "_points"] = np.array((timeline.iloc[:,-2:-1] - timeline.iloc[:,-2:-1].shift(1)).fillna(0)).ravel()
         timeline[timeline.columns[-2:-1][0] + "_points"] = np.array((timeline.iloc[:,-2:-1] - timeline.iloc[:,-2:-1].shift(1)).fillna(0)).ravel()
-        self.timeline = timel#ine
+        self.timeline = timeline
 
 
     def getTerritoryX(self,perc=False, event=None, event_type=None, description=None):
