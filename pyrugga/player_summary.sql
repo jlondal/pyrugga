@@ -132,7 +132,7 @@ players t2 on (
   t1.players_name = t2.players_name
 )
 where
-position > 0
+t1.position > 0
 group by
 1,2,3,4,5,6
 order by
