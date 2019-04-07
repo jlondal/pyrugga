@@ -2,7 +2,7 @@
 
 ![](logo.png)
 
-Pyrugga is a library to help analyse rugby matches using Opta's Super Scout files. To learn more have a look at [Getting Started](https://github.com/jlondal/pyrugga/blob/master/jupyter/tuts/Getting%20Started.ipynb) notebook.
+Pyrugga is a library to help analyse rugby matches using [Opta's](https://www.youtube.com/watch?v=AVmqCoF5qeU) Super Scout files. To learn more have a look at [Getting Started](https://github.com/jlondal/pyrugga/blob/master/jupyter/tuts/Getting%20Started.ipynb) notebook.
 
 ## Why use Pyrugga
 
@@ -14,11 +14,7 @@ Pyrugga is a library to help analyse rugby matches using Opta's Super Scout file
 
 * Player Summary
 
-
-
-* Produces
-
-This library requires Super Scout files from [Opta](https://www.youtube.com/watch?v=AVmqCoF5qeU) which can be download via [Prorugby](https://optaprorugby.com). You will have pay Opta for a license.
+![](player_summary.png)
 
 ## Install
 
