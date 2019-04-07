@@ -8,9 +8,11 @@ Pyrugga is a library to help analyse rugby matches using Opta's Super Scout file
 
 * Converts XML Super Scout files to three Pandas Dataframes providing: a summary of a match, a time line and list of all actions
 
-* Produces Heatmap filtered by each type of action
+* Heatmaps
 
 ![](heatmap.png)
+
+* Player Summary
 
 
 
