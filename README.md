@@ -2,29 +2,35 @@
 
 ![](logo.png)
 
-Pyrugga is a library to help analyse rugby matches using Opta's Super Scout files. Example notebooks can found are:
+Pyrugga is a library to help analyse rugby matches using Opta's Super Scout files. To learn more have a look at [Getting Started](https://github.com/jlondal/pyrugga/blob/master/jupyter/tuts/Getting%20Started.ipynb) notebook.
 
-* [Getting Started](https://github.com/jlondal/pyrugga/blob/master/jupyter/tuts/Getting%20Started.ipynb)
+## Why use Pyrugga
+
+* Converts XML Super Scout files to three Pandas Dataframes providing: a summary of a match, a time line and list of all actions
+
+* Produces Heatmap filtered by each type of action
+
+![](heatmap.png)
 
 
-If you have never used Python don't worry there is a step by step walk through on [Learning Python](https://github.com/jlondal/pyrugga/blob/master/Learning%20Python.md)
-section.
 
+* Produces
 
-To install
+This library requires Super Scout files from [Opta](https://www.youtube.com/watch?v=AVmqCoF5qeU) which can be download via [Prorugby](https://optaprorugby.com). You will have pay Opta for a license.
+
+## Install
 
 ```bash
 pip install pyrugga
 ```
 
-To install the development version
+For the development version
 
 ```bash
 !pip install --upgrade --force-reinstal --no-deps git+https://github.com/jlondal/pyrugga.git
 ```
 
-You will require Super Scout files from [Opta](https://www.youtube.com/watch?v=AVmqCoF5qeU) which can be download via [Prorugby](https://optaprorugby.com).
-
+## Quick Start
 
 ```python
 import pyrugga as prg
@@ -41,6 +47,8 @@ df.events
 df.timeline
 ```
 
-# License
+
+
+## License
 
 See [LICENSE](LICENSE)
