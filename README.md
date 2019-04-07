@@ -43,9 +43,14 @@ df.events
 
 #time line of a match
 df.timeline
+
+#prints a heatmap
+df.heat_map(self, event='Carry', event_type='One Out Drive', description='Crossed Gainline')
+
+#prints a summary of each players actions normalise by phases while pitch
+df.player_summary(norm='phases')
+
 ```
-
-
 
 ## License
 
