@@ -7,7 +7,8 @@ Pyrugga is a library to help analyse rugby matches using Opta's Super Scout file
 * [Getting Started](https://github.com/jlondal/pyrugga/blob/master/jupyter/tuts/Getting%20Started.ipynb)
 
 
-If you have never used Python don't worry there is a step by step walk through on [Learning Python](Learning Python.md) section.
+If you have never used Python don't worry there is a step by step walk through on [Learning Python](https://github.com/jlondal/pyrugga/blob/master/Learning%20Python.md)
+section.
 
 
 To install
