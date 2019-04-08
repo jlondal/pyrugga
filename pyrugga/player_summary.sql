@@ -121,7 +121,42 @@ sum(case when event_type = 'Drop Goal' then 1.0 else 0.0 end ) as drop_goal,
 sum(case when event_type = 'Penalty Goal' then 1.0 else 0.0 end ) as penalty_kick,
 
 sum(case when event = 'Collection' then 1.0 else 0.0 end ) as collection,
-sum(case when event = 'Card' then 1.0 else 0.0 end ) as card
+sum(case when event = 'Card' then 1.0 else 0.0 end ) as card,
+sum(case when event_type = 'Yellow' then 1 else 0 end) as yellow_card,
+sum(case when event_type = 'Red' then 1 else 0 end) as red_card,
+
+--outcomes
+sum(case when outcome = 'Clean Break' then 1 else 0 end) as clean_break,
+sum(case when outcome = 'Collected Bounce' then 1 else 0 end) as collected_bounce,
+sum(case when outcome = 'End Set Kick Error' then 1 else 0 end) as end_set_kick_error,
+sum(case when outcome = 'Error' then 1 else 0 end) as error,
+sum(case when outcome = 'Error - Out Of Play' then 1 else 0 end) as error_out_of_play,
+sum(case when outcome = 'Error - Terratorial Loss' then 1 else 0 end) as error_terratorial_loss,
+sum(case when outcome = 'Forced In Touch' then 1 else 0 end) as forced_in_touch,
+sum(case when outcome = 'Goal Kicked' then 1 else 0 end) as goal_success,
+sum(case when outcome = 'Goal Missed' then 1 else 0 end) as goal_missed,
+sum(case when event_type = 'Conversion' and outcome = 'Goal Kicked' then 1 else 0 end) as goal_success_con,
+sum(case when event_type = 'Conversion' and outcome = 'Goal Missed' then 1 else 0 end) as goal_missed_con,
+sum(case when event_type = 'Drop Goal' and outcome = 'Goal Kicked' then 1 else 0 end) as goal_success_drop,
+sum(case when event_type = 'Drop Goal' and outcome = 'Goal Missed' then 1 else 0 end) as goal_missed_drop,
+sum(case when event_type = 'Penalty Goal' and outcome = 'Goal Kicked' then 1 else 0 end) as goal_success_pen,
+sum(case when event_type = 'Penalty Goal' and outcome = 'Goal Missed' then 1 else 0 end) as goal_missed_pen,
+sum(case when outcome = 'In Goal' then 1 else 0 end) as in_goal,
+sum(case when outcome = 'Ineffective' then 1 else 0 end) as ineffective,
+sum(case when outcome = 'Kick In Touch (Bounce)' then 1 else 0 end) as kick_in_touch_bounce,
+sum(case when outcome = 'Lost Overthrown' then 1 else 0 end) as lost_overthrown,
+sum(case when outcome = 'Off Load' then 1 else 0 end) as off_load,
+sum(case when outcome = 'Pen Conceded' then 1 else 0 end) as pen_conceded,
+sum(case when outcome = 'Penalty Try' then 1 else 0 end) as penalty_try,
+sum(case when outcome = 'Penalty Won' then 1 else 0 end) as penalty_won,
+sum(case when outcome = 'Pressure Error' then 1 else 0 end) as pressure_error,
+sum(case when outcome = 'Pressure In Touch' then 1 else 0 end) as pressure_in_touch,
+sum(case when outcome = 'Reset' then 1 else 0 end) as reset,
+sum(case when outcome = 'Sack' then 1 else 0 end) as sack,
+sum(case when outcome = 'Tackled Dominant' then 1 else 0 end) as tackled_dominant,
+sum(case when outcome = 'Tackled Ineffective' then 1 else 0 end) as tackled_ineffective,
+sum(case when outcome = 'Tackled Neutral' then 1 else 0 end) as tackled_neutral,
+sum(case when outcome = 'To Ground' then 1 else 0 end) as to_ground
 
 
 from
