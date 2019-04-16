@@ -28,6 +28,8 @@ def get_players_fixture(f_in):
     input:
     file location
 
+    
+
     output:
     -- fixture_code
     -- team_id
