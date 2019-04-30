@@ -4,7 +4,8 @@
 *.csv
 *.db
 *.xlsx
-*.xml
+
+jupyter/tuts/Data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
