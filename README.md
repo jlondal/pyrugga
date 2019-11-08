@@ -18,6 +18,15 @@ Pyrugga is a library to help analyse rugby matches using [Opta's](https://www.yo
 
 ## Install
 
+### Windows
+
+If you are using Windows you need to use Docker environment rather than pip installing. To do this install docker https://docs.docker.com/docker-for-windows/ and then download the Pyrugga repo as a [zip file](https://github.com/jlondal/pyrugga/archive/master.zip). Unzip the file and then run the windows_start.bat to start and window_stop.bat to end. Once you start it will launch a juypter server which you can access via [http://127.0.0.1:8080/tree](http://127.0.0.1:8080/tree). 
+
+If you dont know how to use Juypter read this [tutorial](https://www.codecademy.com/articles/how-to-use-jupyter-notebooks). Don't worry about setting up Juypter. Docker does that for you. 
+
+
+### Everyone else (recommended)
+
 ```bash
 pip install pyrugga
 ```
@@ -45,13 +54,12 @@ df.events
 df.timeline
 
 #prints a heatmap
-df.heat_map(self, event='Carry', event_type='One Out Drive', description='Crossed Gainline')
+df.heat_map(event='Carry', event_type='One Out Drive', description='Crossed Gainline')
 
 #prints a summary of each players actions normalise by phases while pitch
 df.player_summary(norm='phases')
 
 ```
-
 ## License
 
 See [LICENSE](LICENSE)
