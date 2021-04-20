@@ -1,6 +1,6 @@
 """
 Author: James Londal
-Copyright: Copyright 2019, Picopie Ltd
+Copyright: Copyright 2021, Picopie Ltd
 License: GNU AFFERO GENERAL PUBLIC LICENSE
 Version: 1.0.0
 Maintainer: James Londal
@@ -43,7 +43,14 @@ EVENTS = StringIO("""action,event
 26,Sequence
 27,Lineout Take
 28,Offensive Scrum
-29,Defensive Scrum""")
+29,Defensive Scrum
+44,Counter Attack
+45,Defensive Exits
+46,Attacking 22 Entry
+41,Players Leavign Field
+40,Defensive Actions
+42,Player Enters Field
+43,Ruck OOA""")
 
 DESCRIPTIONS = StringIO("""qualifier,qualifier_description
 101,One Out Drive
@@ -416,7 +423,139 @@ DESCRIPTIONS = StringIO("""qualifier,qualifier_description
 472,Neutral
 473,Dominant Tackle Contact
 474,Neutral Tackle Contact
-475,Ineffective Tackle Contact""")
+475,Ineffective Tackle Contact
+560,Tackle Arrival 
+653,The player successfully kicks a ’50/22’ 
+652,The player successfully kicks a ’22/50’ 
+653,22 Entry Points – Try without Conversion 
+654,22 Entry Points – Try and Conversion 
+655,22 Entry Points – Penalty Try
+656,22 Entry Points – Penalty Goal 
+657,22 Entry Points – Drop Goal
+658,22 Entry Outcome - Turnover 
+659,22 Entry Outcome – Try 
+660,22 Entry Outcome – Scrum Won
+661,22 Entry Outcome – Penalty Won 
+662,22 Entry Outcome – Penalty Goal Attempt 
+663,22 Entry Outcome – Penalty Conceded 
+664,22 Entry Outcome – Lineout Won
+665,22 Entry Outcome – Kick Turnover 
+638,22 Entry Outcome – Drop Goal
+637,Captains Referral - Inconclusive 
+636,Captains Referral – Overturned 
+635,Captains Referral – Upheld
+633,Defensive OOA 
+632,Attacking OOA 
+631,General Catch 
+632,Kicked out of 22 
+633,Carried out of 22 
+628,Failed Exit From 22 
+629,Turnover 
+630,Try Scored
+631,Scrum Won 
+632,Penalty  Won 
+633,Penalty Conceded
+634,Lineout 621 Won 
+635,Kicked Out 
+636,Kick To Opposition
+618,Drop Goal 
+619,OOA Entry 15th Entry- Def 
+620,OOA Entry 14th Entry- Def 
+621,OOA Entry 13th Entry- Def 
+622,OOA Entry 12th Entry- Def 
+623,OOA Entry 11th Entry- Def 
+624,OOA Entry 10th Entry- Def 
+625,OOA Entry 9th Entry- Def 
+626,OOA Entry 8th Entry- Def 
+627,OOA Entry 7th Entry- Def 
+628,OOA Entry 6th Entry- Def 
+629,OOA Entry 5th Entry- Def 
+630,OOA Entry 4th Entry- Def 
+631,OOA Entry 3rd Entry- Def 
+632,OOA Entry 2nd Entry- Def 
+633,OOA Entry 1st Entry- Def 
+634,OOA Entry 15th Entry- Att 
+635,OOA Entry 14th Entry- Att 
+636,OOA Entry 13th Entry- Att 
+637,OOA Entry 12th Entry- Att 
+638,OOA Entry 11th Entry- Att 
+639,OOA Entry 10th Entry- Att 
+640,OOA Entry 9th Entry- Att 
+641,OOA Entry 8th Entry- Att 
+642,OOA Entry 7th Entry- Att 
+643,OOA Entry 6th Entry- Att 
+644,OOA Entry 5th Entry- Att 
+645,OOA Entry 4th Entry- Att 
+646,OOA Entry 3rd Entry- Att 
+647,OOA Entry 2nd Entry- Att 
+648,OOA Entry 1st Entry- Att 
+649,Own Team 5th+ Entry 
+650,Own Team 4th Entry 
+651,Own Team 3rd Entry 
+652,Own Team 2nd Entry 
+653,Own Team 1st Entry 
+654,Penalty Conceded - Def 
+655,Penalty Conceded – Att
+656,Penalty Won 
+657,Turnover Won 
+658,Got Cleaned Out 
+659,Not Clearing
+660,Nuisance 
+661,Attended 
+662,Secured 
+663,Failed Clearout 
+664,Cleaned Out 
+665,Red Card 
+666,Yellow Card 
+667,Reversal Front Row Replacement 
+668,Reversal Concussion Replacement
+669,Reversal Blood Replacement 
+566,Front Row Replacement
+565,Concussion 
+564,Blood Replacement 
+563,Injury
+562,Tactical
+561,Aerial Kick Contest 
+562,N/A Ruck Speed 
+563,6+ Seconds
+564,5-6 Seconds
+565,4-5 Seconds
+566,3-4 Seconds
+567,2-3 Seconds
+568,1-2 Seconds
+569,0-1 Seconds
+570,N/A Gainline
+571,Euqal to Gainline
+572,Behind Gainline
+548,Over Gainline
+549,Stamping 
+550,Persistent Infringement 
+551,Fighting
+552,Dissent
+553,Professional Foul 
+542,Foul Play
+543,Charged Down 
+544,Dropped Short 
+545,Hit Crossbar 
+546,Hit Right Post 
+547,Hit Left Post 
+548,Missed Right 
+533,Missed Left 
+534,Intercepted Break 
+535,Kick Line Break 
+536,Line Break
+537,Snake 
+538,Decoy 
+539,Break Assist 
+526,Try Assist 
+527,Reload 
+528,Idle 
+505,Stayed on Ground 
+506,4+ Tacklers Committed 
+507,3 Tacklers Committed 
+508,2 Tacklers Committed 
+509,1 Tackler Committed
+500,0 Tacklers Committed""")
 
 events = pd.read_csv(EVENTS, sep=",")
 descriptions = pd.read_csv(DESCRIPTIONS, sep=",")

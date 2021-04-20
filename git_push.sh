@@ -1,3 +1,3 @@
 git add .
-git commit -m "Updating Heatmaps"
+git commit -m "Added support for new event codes"
 git push
