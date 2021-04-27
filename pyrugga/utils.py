@@ -50,7 +50,7 @@ def get_Events(FILES_LOC):
 
         df = pd.concat([df,tmp_df]) 
         
-        return df
+    return df
     
 #VINNY# Looks lovely!
     
@@ -72,7 +72,7 @@ def get_Timelines(FILES_LOC):
 
         df = pd.concat([df,tmp_df]) 
         
-        return df 
+    return df 
 #VINNY# Looks lovely! Question... if someone used this and then wanted to add / update it with newer games, what you think the process would be?    
     
     
@@ -92,7 +92,6 @@ def get_Players(FILES_LOC):
 
         df = pd.concat([df,tmp_df]) 
         
-        return df 
+    return df 
     
 #VINNY# Class!!! The x_fixture_ID is ideal for an easier to read version. Opta do have APIs etc but this seems properly accessible. Amazing!    
-    
