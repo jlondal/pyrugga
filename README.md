@@ -46,7 +46,7 @@ For the development version
 ```python
 import pyrugga as prg
 
-df = pgr.Match('918053_walvfra_new.xml')
+df = prg.Match('918053_walvfra_new.xml')
 
 #print summary of match
 df.summary

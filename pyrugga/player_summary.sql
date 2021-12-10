@@ -9,7 +9,7 @@ avg(phases) as average_phase,
 sum(phases) as phases,
 sum(points) as points_scored,
 sum(metres) as meters_gained,
-((x_coord - x_coord_end)*(x_coord - x_coord_end)) + ((y_coord - y_coord_end)*(y_coord - y_coord_end)) as dist_traveled,
+sum(((x_coord - x_coord_end)*(x_coord - x_coord_end)) + ((y_coord - y_coord_end)*(y_coord - y_coord_end))) as dist_traveled,
 
 -- carry profile
 sum(case when event = 'Carry' then 1.0 else 0.0 end ) as carry,

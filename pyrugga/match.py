@@ -9,12 +9,11 @@ Maintainer: James Londal
 #converts SuperScout file to DataFrame
 from pyrugga.parse_xml import to_df
 
-import sqlite3
-from sqlalchemy import create_engine
+import duckdb
+
 import pandas as pd
 import numpy as np
 import os
-import uuid
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pkgutil
@@ -30,12 +29,22 @@ class Match:
     hometeam = None
     awayteam = None
 
+    conn = None
+
 
     def __init__(self, fn_name, zones=None):
         """
         Creates a Match object from a Superscout XML file
         """
         (self.events,self.summary,self.players) = to_df(fn_name)
+
+        #database
+        self.conn = duckdb.connect(fn_name[:-3],read_only=False)
+
+        self.conn.register("match_events", self.events)
+        self.conn.register("match_summary", self.summary)
+        self.conn.register("players", self.players)
+
         self._genTimeLine()
 
         """
@@ -63,22 +72,10 @@ class Match:
         generates a timeline of match
         """
 
-        tmp_filename = str(uuid.uuid4())
-        #conn = sqlite3.connect(tmp_filename)
-        #engine = create_engine('sqlite:///%s' % (tmp_filename))
-        
-        conn = sqlite3.connect("sqlite://")
-        engine = create_engine("sqlite://")
-
-        self.summary.to_sql('match_summary',engine,if_exists='replace',index=False)
-        self.events.to_sql('match_events',engine,if_exists='replace',index=False)
-
         d = os.path.dirname(sys.modules['pyrugga'].__file__)
         sql = open(os.path.join(d, 'timeline.sql'), 'r').read()
-
-        #os.remove(tmp_filename)
-
-        timeline = pd.io.sql.read_sql(sql,conn)
+        
+        timeline = self.conn.execute(sql).fetchdf()
 
         tmp = self.events.groupby(['team_name','set_num'])['points'].sum().reset_index()
         tmp = pd.pivot_table(tmp, values='points', index=['set_num'],columns=['team_name'], aggfunc=np.sum).cumsum()
@@ -90,9 +87,6 @@ class Match:
         timeline[timeline.columns[-2:-1][0] + "_points"] = np.array((timeline.iloc[:,-2:-1] - timeline.iloc[:,-2:-1].shift(1)).fillna(0)).ravel()
         timeline[timeline.columns[-2:-1][0] + "_points"] = np.array((timeline.iloc[:,-2:-1] - timeline.iloc[:,-2:-1].shift(1)).fillna(0)).ravel()
         self.timeline = timeline
-
-        conn.close()
-
 
     def getTerritoryX(self,perc=False, event=None, event_type=None, description=None):
         """
@@ -230,22 +224,11 @@ class Match:
         norm = ['min','actions','phases']
         """
 
-        tmp_filename = str(uuid.uuid4())
-        #conn = sqlite3.connect(tmp_filename)
-        #engine = create_engine('sqlite:///%s' % (tmp_filename))
-
-        conn = sqlite3.connect("sqlite://")
-        engine = create_engine("sqlite://")
-
-        self.events.to_sql('match_events',engine,if_exists='replace',index=False)
-        self.players.to_sql('players',engine,if_exists='replace',index=False)
-
         d = os.path.dirname(sys.modules['pyrugga'].__file__)
         sql = open(os.path.join(d, 'player_summary.sql'), 'r').read()
 
-        player_summary = pd.io.sql.read_sql(sql,conn)
+        player_summary = self.conn.execute(sql).fetchdf()
 
-        #os.remove(tmp_filename)
 
         player_summary['dist_traveled'] = np.sqrt(player_summary['dist_traveled'])
 
@@ -253,12 +236,10 @@ class Match:
 
 
         if norm == 'min':
-            player_summary.iloc[:,3:] = player_summary.iloc[:,7:].div(player_summary['mins'], axis=0)
+            player_summary.iloc[:,7:] = player_summary.iloc[:,7:].div(player_summary['mins'], axis=0)
         elif norm == 'actions':
-            player_summary.iloc[:,3:] = player_summary.iloc[:,7:].div(player_summary['actions'], axis=0)
+            player_summary.iloc[:,7:] = player_summary.iloc[:,7:].div(player_summary['actions'], axis=0)
         elif norm == 'phases':
-            player_summary.iloc[:,3:] = player_summary.iloc[:,7:].div(player_summary['phases'], axis=0)
-
-        conn.close()
+            player_summary.iloc[:,7:] = player_summary.iloc[:,7:].div(player_summary['phases'], axis=0)
 
         return player_summary

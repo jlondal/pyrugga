@@ -8,3 +8,4 @@ statsmodels
 jupyter
 pyrugga
 seaborn
+duckdb==0.3.1
