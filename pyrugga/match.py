@@ -76,7 +76,7 @@ class Match:
         d = os.path.dirname(sys.modules['pyrugga'].__file__)
         sql = open(os.path.join(d, 'timeline.sql'), 'r').read()
 
-        os.remove(tmp_filename)
+        #os.remove(tmp_filename)
 
         timeline = pd.io.sql.read_sql(sql,conn)
 
@@ -245,7 +245,7 @@ class Match:
 
         player_summary = pd.io.sql.read_sql(sql,conn)
 
-        os.remove(tmp_filename)
+        #os.remove(tmp_filename)
 
         player_summary['dist_traveled'] = np.sqrt(player_summary['dist_traveled'])
 
