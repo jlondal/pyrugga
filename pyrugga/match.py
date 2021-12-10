@@ -67,7 +67,7 @@ class Match:
         #conn = sqlite3.connect(tmp_filename)
         #engine = create_engine('sqlite:///%s' % (tmp_filename))
         
-        conn = sqlite3.connect("file::memory:?cache=shared")
+        conn = sqlite3.connect("sqlite://")
         engine = create_engine("sqlite://")
 
         self.summary.to_sql('match_summary',engine,if_exists='replace',index=False)
@@ -234,7 +234,7 @@ class Match:
         #conn = sqlite3.connect(tmp_filename)
         #engine = create_engine('sqlite:///%s' % (tmp_filename))
 
-        conn = sqlite3.connect("file::memory:?cache=shared")
+        conn = sqlite3.connect("sqlite://")
         engine = create_engine("sqlite://")
 
         self.events.to_sql('match_events',engine,if_exists='replace',index=False)
