@@ -29,6 +29,30 @@ def _generate_id(df):
     fixture_id = hometeam+"v"+awayteam+"_"+day+month+year
     return fixture_id
 
+def _add_win(match):
+    #work out which team won and by how much 
+    if match.summary['home_score'][0] > match.summary['away_score'][0]:
+        match.summary['won'] = match.summary['hometeam']
+    elif match.summary['home_score'][0] == match.summary['away_score'][0]:
+        match.summary['won'] = 'Draw'
+    else:
+        match.summary['won'] = match.summary['awayteam']
+
+    match.summary['points_dif'] = match.summary['home_score'][0] - match.summary['away_score'][0]
+
+    return match.summary    
+
+def _add_won_flag(row,team):
+    if row['team_name'] == team:
+        return 1
+    else :
+        return 0 
+    
+def _add_points_dif(row,team,diff):
+    if row['team_name'] == team:
+        return diff
+    else :
+        return -1*diff
 
 def get_Events(FILES_LOC):
     """
@@ -82,13 +106,18 @@ def get_Players(FILES_LOC):
 
     for fn in _find_files(FILES_LOC,'xml'):
         #loads each file and stores them in an list
-        match = prg.Match(FILES_LOC + fn) 
+        match = prg.Match(FILES_LOC + fn)
+        match.summary = _add_win(match)
 
-        tmp_df = match.player_summary(norm='mins').reset_index()
+        tmp_df = match.player_summary().reset_index()
         tmp_df['x_fixture_id'] = _generate_id(match.summary)
 
         #this is how we should have done this 
         #tmp_df['fixture_id'] = match.summary['fixture_id']
+
+        tmp_df['won'] = tmp_df.apply(_add_won_flag,axis=1,team=match.summary['won'][0])
+        tmp_df['points_dif'] = tmp_df.apply(_add_points_dif,axis=1,team=match.summary['won'][0],
+                                    diff=match.summary['points_dif'][0]) 
 
         df = pd.concat([df,tmp_df]) 
         
