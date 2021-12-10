@@ -64,7 +64,8 @@ class Match:
         """
 
         tmp_filename = str(uuid.uuid4())
-        conn = sqlite3.connect(tmp_filename)
+        #conn = sqlite3.connect(tmp_filename)
+        conn = sqlite3.connect("file::memory:?cache=shared")
 
         engine = create_engine('sqlite:///%s' % (tmp_filename))
 
@@ -227,7 +228,8 @@ class Match:
         """
 
         tmp_filename = str(uuid.uuid4())
-        conn = sqlite3.connect(tmp_filename)
+        #conn = sqlite3.connect(tmp_filename)
+        conn = sqlite3.connect("file::memory:?cache=shared")
 
         engine = create_engine('sqlite:///%s' % (tmp_filename))
 
