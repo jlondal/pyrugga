@@ -39,7 +39,7 @@ class Match:
         (self.events,self.summary,self.players) = to_df(fn_name)
 
         #database
-        self.conn = duckdb.connect(fn_name[:-3],read_only=False)
+        self.conn = duckdb.connect(fn_name[:-4]+".DB",read_only=False)
 
         self.conn.register("match_events", self.events)
         self.conn.register("match_summary", self.summary)
