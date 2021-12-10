@@ -18,14 +18,18 @@ Pyrugga is a library to help analyse rugby matches using [Opta's](https://www.yo
 
 ## Install
 
-### Windows
+### I am new to all of this
 
-If you are using Windows you need to use Docker environment rather than pip installing. To do this install docker https://docs.docker.com/docker-for-windows/ and then download the Pyrugga repo as a [zip file](https://github.com/jlondal/pyrugga/archive/master.zip). Unzip the file and then run the windows_start.bat to start and window_stop.bat to end. Once you start it will launch a juypter server which you can access via [http://127.0.0.1:8080/tree](http://127.0.0.1:8080/tree). 
+The easest route is to use [Docker](https://docs.docker.com/get-docker/). Download the Pyrugga repo as a [zip file](https://github.com/jlondal/pyrugga/archive/master.zip).Then unzip and open a [terminal](https://www.youtube.com/watch?v=aKRYQsKR46I) window in the folder then type
 
-If you dont know how to use Juypter read this [tutorial](https://www.codecademy.com/articles/how-to-use-jupyter-notebooks). Don't worry about setting up Juypter. Docker does that for you. 
+```bash
+docker-compose up 
+```
+
+This will launch a juypter server which you can access via [http://127.0.0.1:8080/tree](http://127.0.0.1:8080/tree). If you dont know how to use Juypter read this [tutorial](https://www.codecademy.com/articles/how-to-use-jupyter-notebooks). 
 
 
-### Everyone else (recommended)
+### I know what I am doing
 
 ```bash
 pip install pyrugga

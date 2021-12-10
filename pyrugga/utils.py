@@ -26,7 +26,7 @@ def _generate_id(df):
     month = df['fixture_date'].apply(lambda x: x[3:-5])[0]
     day = df['fixture_date'].apply(lambda x: x[:2])[0]
 
-    fixture_id = hometeam+awayteam+"_"+day+month+year
+    fixture_id = hometeam+"v"+awayteam+"_"+day+month+year
     return fixture_id
 
 
