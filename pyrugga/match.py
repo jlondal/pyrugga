@@ -65,9 +65,10 @@ class Match:
 
         tmp_filename = str(uuid.uuid4())
         #conn = sqlite3.connect(tmp_filename)
+        #engine = create_engine('sqlite:///%s' % (tmp_filename))
+        
         conn = sqlite3.connect("file::memory:?cache=shared")
-
-        engine = create_engine('sqlite:///%s' % (tmp_filename))
+        engine = create_engine("file::memory:?cache=shared")
 
         self.summary.to_sql('match_summary',engine,if_exists='replace',index=False)
         self.events.to_sql('match_events',engine,if_exists='replace',index=False)
@@ -89,6 +90,8 @@ class Match:
         timeline[timeline.columns[-2:-1][0] + "_points"] = np.array((timeline.iloc[:,-2:-1] - timeline.iloc[:,-2:-1].shift(1)).fillna(0)).ravel()
         timeline[timeline.columns[-2:-1][0] + "_points"] = np.array((timeline.iloc[:,-2:-1] - timeline.iloc[:,-2:-1].shift(1)).fillna(0)).ravel()
         self.timeline = timeline
+
+        conn.close()
 
 
     def getTerritoryX(self,perc=False, event=None, event_type=None, description=None):
@@ -229,9 +232,10 @@ class Match:
 
         tmp_filename = str(uuid.uuid4())
         #conn = sqlite3.connect(tmp_filename)
-        conn = sqlite3.connect("file::memory:?cache=shared")
+        #engine = create_engine('sqlite:///%s' % (tmp_filename))
 
-        engine = create_engine('sqlite:///%s' % (tmp_filename))
+        conn = sqlite3.connect("file::memory:?cache=shared")
+        engine = create_engine("file::memory:?cache=shared")
 
         self.events.to_sql('match_events',engine,if_exists='replace',index=False)
         self.players.to_sql('players',engine,if_exists='replace',index=False)
@@ -254,5 +258,7 @@ class Match:
             player_summary.iloc[:,3:] = player_summary.iloc[:,7:].div(player_summary['actions'], axis=0)
         elif norm == 'phases':
             player_summary.iloc[:,3:] = player_summary.iloc[:,7:].div(player_summary['phases'], axis=0)
+
+        conn.close()
 
         return player_summary
